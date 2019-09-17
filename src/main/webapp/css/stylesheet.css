@@ -1,0 +1,8 @@
+.topBanner {
+	font-family:Arial;
+	font-size:20pt;
+	color:blue;
+	position:relative;
+	left:500px;
+	border:2px solid orange;
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-UK">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+
+	<head>
+		<!-- Include any of the Javascrupt libraries -->
+		<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.11.4.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.10.0.min.js"></script>
+		<script type="text/javascript" src="js/jquery.jtable.min.js"></script>
+		<script type="text/javascript" src="js/customDateFormat.js"></script>
+		
+		<!-- Include any of the CSS  -->
+		<link type="text/css" rel="stylesheet" href="css/stylesheet.css"/>
+		<link type="text/css" rel="stylesheet" href="css/themes/metro/blue/jtable.css"/>
+		<link type="text/css" rel="stylesheet" href="css/themes/metro/lightgray/jtable.css"/>
+		
+	</head>
+	
+	<title>File Parser Page</title>
+	
+	<body>
+	
+	<table>
+		<tr>
+			<td >
+				<div >
+					<h2 class="topBanner" style="border:2px solid orange; text-align:center; width:350px;">FILE PARSER</h2>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				
+				<table id="mainTable">
+					<tr>
+						<th style="width: 1000px; color:#00AAEF; font-family:'Arial'; font-size:14.5px;">
+							<span style="color: grey;">Upload CSV file</span>
+						</th> 
+					</tr>
+				
+				
+					<tr >
+						<td style="width: 1000px; border: 1px solid #00AAEF;">
+							<span style="width: 100px; color: grey; font-family:'Arial'; font-size:14px;">LIMIT</span>
+							<input style="width: 400px; color: grey; font-family:'Arial'; font-size:14px;" id="limit" name="limit">
+							<span style="width: 100px; color: grey; font-family:'Arial'; font-size:14px; position:relative; left: 50px;">MIN VALUE</span>
+							<input style="width: 400px; color: grey; font-family:'Arial'; font-size:14px; position:relative; left: 60px;" id="minValue" name="minValue">
+							<br><br>
+							<span style="width: 100px; color: grey; font-family:'Arial'; font-size:14px;">Please select a file - extension must be CSV</span>
+							<br><br>
+							<input type="file" style="width: 400px; color: grey; font-family:'Arial'; font-size:14px;" id="attachment" name="attachment">
+							<button style="color:orange; font-family:Arial" onclick="parseFile()"> Submit File</button>
+						</td> 
+					</tr>
+				</table>
+			</td>
+		</tr>
+	
+	</table>
+	
+	
+	<script type="text/javascript">
+	
+	window.onload = function(){}
+	
+	function parseFile(){
+		
+		var limit = document.getElementById("limit").value;
+		var minValue = document.getElementById("minValue").value;
+		var attachment = document.getElementById("attachment").files[0];
+		
+		if (limit === "" || parseInt(limit) < 0){
+			alert("Limit has to be greater than 0");
+		} else if (minValue === "" || parseFloat(minValue) <0 ||
+				parseFloat(minValue) >1){
+			alert("Min Value as to be a float number between 0 and 1");
+		} else {
+			alert("All Correct");
+			
+			var formData = new FormData();
+			formData.append("file", attachment);
+			formData.append("limit", limit);
+			formData.append("minValue", minValue);
+			
+			$.ajax({
+				type: 'POST',
+				data: formData,
+			 	processData: false, // important
+        	 	contentType: false, // important
+				url: "../rest/Parser/parserFile",
+				success: function(data){
+					
+			
+				}
+			});
+		}
+	}
+
+	</script>
+	
+	</body>
+</html>
