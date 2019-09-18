@@ -45,15 +45,17 @@
 				
 					<tr >
 						<td style="width: 1000px; border: 1px solid #00AAEF;">
-							<span style="width: 100px; color: grey; font-family:'Arial'; font-size:14px;">LIMIT</span>
-							<input style="width: 400px; color: grey; font-family:'Arial'; font-size:14px;" id="limit" name="limit">
-							<span style="width: 100px; color: grey; font-family:'Arial'; font-size:14px; position:relative; left: 50px;">MIN VALUE</span>
-							<input style="width: 400px; color: grey; font-family:'Arial'; font-size:14px; position:relative; left: 60px;" id="minValue" name="minValue">
-							<br><br>
-							<span style="width: 100px; color: grey; font-family:'Arial'; font-size:14px;">Please select a file - extension must be CSV</span>
-							<br><br>
-							<input type="file" style="width: 400px; color: grey; font-family:'Arial'; font-size:14px;" id="attachment" name="attachment">
-							<button style="color:orange; font-family:Arial" onclick="parseFile()"> Submit File</button>
+							<form name="parseFile" action="http://localhost:8080/Warwick/rest/Parser/parserFile" method="post" enctype="multipart/form-data" target="_blank">
+								<span style="width: 100px; color: grey; font-family:'Arial'; font-size:14px;">LIMIT</span>
+								<input style="width: 400px; color: grey; font-family:'Arial'; font-size:14px;" id="limit" name="limit">
+								<span style="width: 100px; color: grey; font-family:'Arial'; font-size:14px; position:relative; left: 50px;">MIN VALUE</span>
+								<input style="width: 400px; color: grey; font-family:'Arial'; font-size:14px; position:relative; left: 60px;" id="minValue" name="minValue">
+								<br><br>
+								<span style="width: 100px; color: grey; font-family:'Arial'; font-size:14px;">Please select a file - extension must be CSV</span>
+								<br><br>
+								<input type="file" style="width: 400px; color: grey; font-family:'Arial'; font-size:14px;" id="attachment" name="attachment" accept="application/octet-stream">
+								<input type="submit" style="color:orange; font-family:Arial" onclick="parsingFile()" value="Submit File">
+							</form>
 						</td> 
 					</tr>
 				</table>
@@ -67,7 +69,7 @@
 	
 	window.onload = function(){}
 	
-	function parseFile(){
+	function parsingFile(){
 		
 		var limit = document.getElementById("limit").value;
 		var minValue = document.getElementById("minValue").value;
@@ -75,30 +77,17 @@
 		
 		if (limit === "" || parseInt(limit) < 0){
 			alert("Limit has to be greater than 0");
+			return false;
 		} else if (minValue === "" || parseFloat(minValue) <0 ||
 				parseFloat(minValue) >1){
 			alert("Min Value as to be a float number between 0 and 1");
+			return false;
 		} else {
-			alert("All Correct");
-			
-			var formData = new FormData();
-			formData.append("file", attachment);
-			formData.append("limit", limit);
-			formData.append("minValue", minValue);
-			
-			$.ajax({
-				type: 'POST',
-				data: formData,
-			 	processData: false, // important
-        	 	contentType: false, // important
-				url: "../rest/Parser/parserFile",
-				success: function(data){
-					
-			
-				}
-			});
+			return true
 		}
 	}
+	
+	
 
 	</script>
 	

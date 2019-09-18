@@ -14,7 +14,7 @@ version="2.5">
         <!-- Define the package to search for classes -->
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>com.main.Transaction</param-value>
+            <param-value>com.main.parser</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>

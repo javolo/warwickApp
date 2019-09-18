@@ -7,3 +7,4 @@ You just joined a company with one developer who manages his code using GIT. The
 Where would you begin? Please explain how you’d define what needs to be done and why, explaining the pros and cons of your approach. Assume the answer is for a technical person also familiar with software development cycle. 
 
 # Response
+

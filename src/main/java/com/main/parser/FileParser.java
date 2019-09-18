@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -15,7 +14,9 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.main.exception.FileException;
 import com.main.parser.bl.FileParserBL;
+import com.sun.jersey.multipart.FormDataParam;
 
 
 @Path("Parser")
@@ -44,8 +45,8 @@ public class FileParser {
 	@Path("parserFile")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces({"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"})
-	public void parserFile(@FormParam("file") File csvFile, @FormParam("limit") int limit, 
-			@FormParam("minValue") float minValue) throws IOException{
+	public void parserFile(@FormDataParam("attachment") File csvFile, @FormDataParam("limit") int limit, 
+			@FormDataParam("minValue") float minValue) throws IOException, FileException{
 		
 		// Set Response Headers for File Parser
 		final StringBuilder attachmentName = new StringBuilder();
