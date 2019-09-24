@@ -14,7 +14,7 @@ import com.main.model.Column;
 
 public class FileUtils {
 
-	// Method to translate the file into a list of Lenders
+	// Method to translate the file into a list of Column (column number, Big Decimal)
 	public static List<List<Column>> transformCSVFileIntoList(final File inputFile, int limit, final float minValue) throws FileNotFoundException, FileException{
 
 		List<List<Column>> result = new ArrayList<>();
@@ -42,6 +42,7 @@ public class FileUtils {
 			if (rowNumbers.size() > limit) {
 				rowNumbers = rowNumbers.subList(0, limit);
 			}
+			// Only add to the output file if we found at least a number on the list that meet the criteria
 			if (rowNumbers.size() > 0) {
 				result.add(rowNumbers);
 			}

@@ -36,6 +36,8 @@ public class FileParserBL {
 		int colNum = 0;
 		Row row ;
 		Cell cell;
+		
+		// We generate the output file
 		for (List<Column> list : listFromFile) {
 			row = sheet.createRow(rowNum);
 			for (Column col: list) {
