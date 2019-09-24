@@ -45,7 +45,7 @@
 				
 					<tr >
 						<td style="width: 1000px; border: 1px solid #00AAEF;">
-							<form name="parseFile" action="http://localhost:8080/Warwick/rest/Parser/parserFile" method="post" enctype="multipart/form-data" target="_blank">
+							<form name="parseFile" action="http://localhost:8080/Warwick/rest/Parser/parserFile" method="post" enctype="multipart/form-data" target="_blank" onsubmit="setTimeout(function(){window.location.reload();},10)">
 								<span style="width: 100px; color: grey; font-family:'Arial'; font-size:14px;">LIMIT</span>
 								<input style="width: 400px; color: grey; font-family:'Arial'; font-size:14px;" id="limit" name="limit">
 								<span style="width: 100px; color: grey; font-family:'Arial'; font-size:14px; position:relative; left: 50px;">MIN VALUE</span>
